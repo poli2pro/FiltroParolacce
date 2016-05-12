@@ -44,7 +44,7 @@ namespace Filtro_Parolacce
                 MessageBox.Show("ERRORE: per postare la tua storia, inserisci del testo");
                 return;
             }
-            testo = txtTesto.Text;                           //TESTO SCRITTO DALL'UTENTEhh;
+            testo = txtTesto.Text;                           //TESTO SCRITTO DALL'UTENTE;
 
             linguaInglese = controlloLingua(testo);          //SE IL TESTO RISULTA SCRITTO IN INGLESE, QUESTO VALORE BOOLEANO SARA' TRUE, ALTRIMENTI FALSE;
 
@@ -97,7 +97,7 @@ namespace Filtro_Parolacce
             string[] paroleTesto = testo.Split(' ');
             if (linguaInglese)
             {
-                parolacce = estrazioneParole("parolacceInglese.txt");
+                parolacce = estrazioneParole("parolacceInglesi.txt");
             }
             else
             {
