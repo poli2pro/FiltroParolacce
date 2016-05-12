@@ -32,6 +32,7 @@ namespace Filtro_Parolacce
 
         bool linguaInglese;
         string testo = "";
+        double percentuale;
 
 
 
@@ -46,22 +47,100 @@ namespace Filtro_Parolacce
             testo = txtTesto.Text;                           //TESTO SCRITTO DALL'UTENTEhh;
 
             linguaInglese = controlloLingua(testo);          //SE IL TESTO RISULTA SCRITTO IN INGLESE, QUESTO VALORE BOOLEANO SARA' TRUE, ALTRIMENTI FALSE;
-            
+
+            percentuale = percentualeParolacce(testo, linguaInglese);       //RESTITUISCE LA PERCENTUALE DELLE PAROLACCE TROVATE IN UN TESTO
+
+
+
+        }
+
+
+
+        string[] estrazioneParole(string percorso)
+        {
+            string[] paroleTesto = new string[0];
+            FileStream parole = new FileStream(percorso, FileMode.Open);
+            StreamReader lettura = new StreamReader(parole);
+            while (!lettura.EndOfStream)
+            {
+                string word = lettura.ReadLine();
+                Array.Resize(ref paroleTesto, paroleTesto.Length + 1);
+                paroleTesto[paroleTesto.Length - 1] = word;
+            }
+            lettura.Close();
+            parole.Close();
+            return paroleTesto;
+        }
+
+        void ordinaArrayStringhe(string[] array)
+        {
+            for(int i=0; i < array.Length - 1; i++)
+            {
+                for(int j=0; j< array.Length; j++)
+                {
+                    if (string.Compare(array[i], array[j]) < 0)
+                    {
+                        string tmp = array[i];
+                        array[i] = array[j];
+                        array[j] = tmp;
+                    }
+                }
+            }
+        }
+
+
+
+
+        double percentualeParolacce(string testo, bool linguaInglese)
+        {
+            string[] parolacce;
+            string[] paroleTesto = testo.Split(' ');
+            if (linguaInglese)
+            {
+                parolacce = estrazioneParole("parolacceInglese.txt");
+            }
+            else
+            {
+                parolacce = estrazioneParole("parolacceItaliane.txt");
+            }
+
+            ordinaArrayStringhe(parolacce);
+
+
+            int parolacceTrovate = 0;
+            int parolacceNonTrovate = 0;
+            for (int i=0; i < paroleTesto.Length; i++)
+            {
+                bool trovataParola = ricercaParola(paroleTesto[i], parolacce);
+                if (trovataParola)
+                    parolacceTrovate++;
+                else
+                    parolacceNonTrovate++;
+            }
+
+            int paroleTotali = parolacceTrovate + parolacceNonTrovate;
+            double percentuale = (paroleTotali / parolacceTrovate) * 100;
+
+            return percentuale;
 
         }
 
 
 
 
-        bool parolaInglese(string parola)
+
+
+
+
+        bool ricercaParola(string parola, string[] testo)
         {
             int primo, medio, ultimo;
             primo = 0;
-            ultimo = paroleInglesi.Length - 1;
+            ultimo = testo.Length - 1;
             while (primo <= ultimo)
             {
                 medio = (primo + ultimo) / 2;
-                string parolaMedia = paroleInglesi[medio];
+                string parolaMedia = testo[medio];
                 if (parolaMedia == parola)
                 {
                     return true;
@@ -69,12 +148,12 @@ namespace Filtro_Parolacce
                 if (string.Compare(parolaMedia, parola) > 0)
                 {
                     ultimo = medio - 1;
-                    
+
                 }
                 else
                 {
                     primo = medio + 1;
-                    
+
                 }
             }
             return false;
@@ -85,21 +164,21 @@ namespace Filtro_Parolacce
         {
             int paroleTrov = 0;
             int paroleNonTrov = 0;
-            
+
             string[] parole = testo.Split(' ');         //ARRAY DELLE PAROLE SCRITTE DALL'UTENTE
-            for(int i = 0; i < parole.Length; i++)
+            for (int i = 0; i < parole.Length; i++)
             {
-                bool controllo = parolaInglese(parole[i]);
+                bool controllo = ricercaParola(parole[i],paroleInglesi);
                 if (controllo)
                 {
                     paroleTrov++;
                 }
-                else if(!controllo)
+                else if (!controllo)
                     paroleNonTrov++;
             }
 
 
-            if(paroleTrov>=paroleNonTrov)
+            if (paroleTrov >= paroleNonTrov)
             {
                 return true;
             }
@@ -116,27 +195,19 @@ namespace Filtro_Parolacce
 
 
 
-        string[] paroleInglesi = new string[0];
+        string[] paroleInglesi;
 
 
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            FileStream parole = new FileStream("Lista parole Inglese.txt", FileMode.Open);
-            StreamReader lettura = new StreamReader(parole);
-            while (!lettura.EndOfStream)
-            {
-                string word = lettura.ReadLine();
-                Array.Resize(ref paroleInglesi, paroleInglesi.Length + 1);
-                paroleInglesi[paroleInglesi.Length - 1] = word;
-            }
-            lettura.Close();
-            parole.Close();
+            
+            paroleInglesi = estrazioneParole("Lista parole Inglese.txt");
 
 
 
         }
 
-      
+
     }
 }
