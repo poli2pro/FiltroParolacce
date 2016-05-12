@@ -30,7 +30,8 @@ namespace Filtro_Parolacce
 
 
 
-
+        bool linguaInglese;
+        string testo = "";
 
 
 
@@ -42,12 +43,10 @@ namespace Filtro_Parolacce
                 MessageBox.Show("ERRORE: per postare la tua storia, inserisci del testo");
                 return;
             }
+            testo = txtTesto.Text;                           //TESTO SCRITTO DALL'UTENTE;
 
-            bool linguaTesto = linguaInglese(txtTesto.Text);
-            if (linguaTesto)
-                label1.Text = "Inglese";
-            else
-                label1.Text = "Italiano";
+            linguaInglese = controlloLingua(testo);          //SE IL TESTO RISULTA SCRITTO IN INGLESE, QUESTO VALORE BOOLEANO SARA' TRUE, ALTRIMENTI FALSE;
+            
 
         }
 
@@ -82,7 +81,7 @@ namespace Filtro_Parolacce
         }
 
 
-        bool linguaInglese(string testo)
+        bool controlloLingua(string testo)
         {
             int paroleTrov = 0;
             int paroleNonTrov = 0;
