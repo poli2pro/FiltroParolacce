@@ -29,7 +29,8 @@ namespace Filtro_Parolacce
 
 
 
-
+        bool linguaInglese;
+        string testo = "";
 
 
 
@@ -43,11 +44,10 @@ namespace Filtro_Parolacce
                 return;
             }
 
-            bool linguaTesto = linguaInglese(txtTesto.Text);
-            if (linguaTesto)
-                label1.Text = "Inglese";
-            else
-                label1.Text = "Italiano";
+
+            testo = txtTesto.Text;                          //TESTO SCRITTO DALL'UTENTE;
+            linguaInglese = controlloLingua(testo);         //SE IL TESTO E' IN INGLESE QUESTO BOOL RISULTA VERO, ALTRIMENTI FALSE;
+            
 
         }
 
@@ -82,7 +82,7 @@ namespace Filtro_Parolacce
         }
 
 
-        bool linguaInglese(string testo)
+        bool controlloLingua(string testo)
         {
             int paroleTrov = 0;
             int paroleNonTrov = 0;
@@ -138,6 +138,9 @@ namespace Filtro_Parolacce
 
         }
 
-      
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
