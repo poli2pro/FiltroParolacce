@@ -45,7 +45,7 @@ namespace Filtro_Parolacce
                 MessageBox.Show("ERRORE: per postare la tua storia, inserisci del testo");
                 return;
             }
-            testo = txtTesto.Text;                           //TESTO SCRITTO DALL'UTENTE;
+            testo = txtTesto.Text;                           //TESTO SCRITTO DALL'UTENTE
 
             linguaInglese = controlloLingua(testo);          //SE IL TESTO RISULTA SCRITTO IN INGLESE, QUESTO VALORE BOOLEANO SARA' TRUE, ALTRIMENTI FALSE;
 
