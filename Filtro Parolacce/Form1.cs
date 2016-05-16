@@ -30,7 +30,7 @@ namespace Filtro_Parolacce
 
 
 
-
+        List<string> quote = new List<string>();
         bool linguaInglese;
         string testo = "";
         double percentuale;
@@ -50,6 +50,60 @@ namespace Filtro_Parolacce
             linguaInglese = controlloLingua(testo);          //SE IL TESTO RISULTA SCRITTO IN INGLESE, QUESTO VALORE BOOLEANO SARA' TRUE, ALTRIMENTI FALSE;
 
             percentuale = percentualeParolacce(testo, linguaInglese);       //RESTITUISCE LA PERCENTUALE DELLE PAROLACCE TROVATE IN UN TESTO
+
+            if(percentuale < 20)
+            {
+                
+                int conta = 1;
+                int x = 10;
+                int y = 10;
+                int c = 0;
+
+                FileStream file = new FileStream("txt.txt", FileMode.OpenOrCreate);
+                StreamWriter scrivi = new StreamWriter(file);
+                for (int i = 0; i < txtTesto.TextLength; i++)
+                {
+                    scrivi.WriteLine(txtTesto.Text);
+                }
+                scrivi.Close();
+                file.Close();
+                FileStream file2 = new FileStream("txt.txt", FileMode.Open);
+                StreamReader a = new StreamReader(file2);
+                while (!a.EndOfStream)
+                {
+                    a.ReadLine();
+                    c++;
+
+                }
+                a.Close();
+                file2.Close();
+
+
+                RichTextBox lst = new RichTextBox();
+                lst.Name = "rich" + conta.ToString();
+
+                lst.Location = new System.Drawing.Point(x, y);
+                lst.Size = new Size(txtTesto.TextLength, c);
+
+
+                quote.Add(txtTesto.Text);
+                MessageBox.Show("Pubblicato!", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+                tabPage2.Controls.Add(lst);
+                foreach (string cont in quote)
+                {
+                    lst.Text = cont;
+                }
+
+                conta++;
+                y += 100;
+
+
+            }
+            else
+            {
+                MessageBox.Show("Errore troppe parolacce! Non inserito!", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
 
 
@@ -94,6 +148,7 @@ namespace Filtro_Parolacce
 
         double percentualeParolacce(string testo, bool linguaInglese)
         {
+            double percentuale = 0;
             string[] parolacce;
             string[] paroleTesto = testo.Split(' ');
             if (linguaInglese)
@@ -108,8 +163,8 @@ namespace Filtro_Parolacce
             ordinaArrayStringhe(parolacce);
 
 
-            int parolacceTrovate = 0;
-            int parolacceNonTrovate = 0;
+            double parolacceTrovate = 0;
+            double parolacceNonTrovate = 0;
             for (int i=0; i < paroleTesto.Length; i++)
             {
                 bool trovataParola = ricercaParola(paroleTesto[i], parolacce);
@@ -119,12 +174,15 @@ namespace Filtro_Parolacce
                     parolacceNonTrovate++;
             }
 
-            int paroleTotali = parolacceTrovate + parolacceNonTrovate;
-            double percentuale = (paroleTotali / ((parolacceTrovate==0)?1:parolacceTrovate)) * 100;
+            double paroleTotali = parolacceTrovate + parolacceNonTrovate;
+            return percentuale =  (parolacceTrovate/ paroleTotali) * 100;
 
-            return percentuale;
+            
 
         }
+
+   
+        
 
 
 
