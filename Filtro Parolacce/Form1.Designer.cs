@@ -30,10 +30,10 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnPubblica = new System.Windows.Forms.Button();
             this.txtTesto = new System.Windows.Forms.RichTextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -60,6 +60,15 @@
             this.tabPage1.Size = new System.Drawing.Size(785, 532);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Posta qualcosa!";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(106, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(105, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "aggiorna il tuo BLOG";
             // 
             // btnPubblica
             // 
@@ -89,22 +98,12 @@
             this.tabPage2.Text = "Blog page";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(106, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "aggiorna il tuo BLOG";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(817, 584);
             this.Controls.Add(this.tabControl1);
-            this.Enabled = false;
             this.Name = "Form1";
             this.Text = "progetto";
             this.Load += new System.EventHandler(this.Form1_Load);

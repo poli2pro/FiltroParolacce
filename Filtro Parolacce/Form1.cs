@@ -119,7 +119,7 @@ namespace Filtro_Parolacce
             }
 
             int paroleTotali = parolacceTrovate + parolacceNonTrovate;
-            double percentuale = (paroleTotali / parolacceTrovate) * 100;
+            double percentuale = (paroleTotali / ((parolacceTrovate==0)?1:parolacceTrovate)) * 100;
 
             return percentuale;
 
