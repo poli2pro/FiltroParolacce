@@ -30,10 +30,14 @@ namespace Filtro_Parolacce
 
 
 
-        List<string> quote = new List<string>();
+        string[] quote = new string[0];
         bool linguaInglese;
         string testo = "";
         double percentuale;
+        int conta = 1;
+        int x = 10;
+        int y = 10;
+        int c = 0;
 
 
 
@@ -54,10 +58,7 @@ namespace Filtro_Parolacce
             if(percentuale < 20)
             {
                 
-                int conta = 1;
-                int x = 10;
-                int y = 10;
-                int c = 0;
+                
 
                 FileStream file = new FileStream("txt.txt", FileMode.OpenOrCreate);
                 StreamWriter scrivi = new StreamWriter(file);
@@ -80,13 +81,18 @@ namespace Filtro_Parolacce
 
 
                 RichTextBox lst = new RichTextBox();
-                lst.Name = "rich" + conta.ToString();
+                lst.Name = "rich_" + conta.ToString();
 
-                lst.Location = new System.Drawing.Point(x, y);
-                lst.Size = new Size(txtTesto.TextLength, c);
+                lst.Location = new System.Drawing.Point(x,y);
+                lst.Size = new Size(TextRenderer.MeasureText(txtTesto.Text,txtTesto.Font).Width+1, TextRenderer.MeasureText(txtTesto.Text[0].ToString(), txtTesto.Font).Height*(txtTesto.Lines.Length+1));
 
 
-                quote.Add(txtTesto.Text);
+                Array.Resize(ref quote, quote.Length+1);
+                quote[quote.Length - 1] = txtTesto.Text;
+                
+
+
+                
                 MessageBox.Show("Pubblicato!", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
                 tabPage2.Controls.Add(lst);
@@ -97,6 +103,7 @@ namespace Filtro_Parolacce
 
                 conta++;
                 y += 100;
+                
 
 
             }

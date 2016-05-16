@@ -32,8 +32,8 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.btnPubblica = new System.Windows.Forms.Button();
-            this.txtTesto = new System.Windows.Forms.RichTextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.txtTesto = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -80,14 +80,6 @@
             this.btnPubblica.UseVisualStyleBackColor = true;
             this.btnPubblica.Click += new System.EventHandler(this.btnPubblica_Click);
             // 
-            // txtTesto
-            // 
-            this.txtTesto.Location = new System.Drawing.Point(17, 79);
-            this.txtTesto.Name = "txtTesto";
-            this.txtTesto.Size = new System.Drawing.Size(752, 404);
-            this.txtTesto.TabIndex = 0;
-            this.txtTesto.Text = "";
-            // 
             // tabPage2
             // 
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -97,6 +89,14 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Blog page";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // txtTesto
+            // 
+            this.txtTesto.Location = new System.Drawing.Point(17, 79);
+            this.txtTesto.Name = "txtTesto";
+            this.txtTesto.Size = new System.Drawing.Size(752, 404);
+            this.txtTesto.TabIndex = 0;
+            this.txtTesto.Text = "";
             // 
             // Form1
             // 
@@ -119,9 +119,9 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button btnPubblica;
-        private System.Windows.Forms.RichTextBox txtTesto;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RichTextBox txtTesto;
     }
 }
 
