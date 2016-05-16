@@ -12,8 +12,6 @@ using System.IO;
 namespace Filtro_Parolacce
 {
 
-
-
     public partial class Form1 : Form
     {
         public Form1()
