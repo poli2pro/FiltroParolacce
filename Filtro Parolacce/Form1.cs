@@ -25,24 +25,39 @@ namespace Filtro_Parolacce
             {
                 return false;
             }
+
             return true;
         }
+        bool scrittoAutore()
+        {
+            if (textBox1.Text == "")
+                return false;
 
+            return true;
+        }
 
 
 
         bool linguaInglese;
         string testo = "";
         double percentuale;
-
+        string autore = "";
 
 
         private void btnPubblica_Click(object sender, EventArgs e)
         {
+            bool scritto = true;
+
             bool contr = scrittoQualcosa();
             if (!contr)
             {
                 MessageBox.Show("ERRORE: per postare la tua storia, inserisci del testo");
+                return;
+            }
+            contr = scrittoAutore();
+            if (!contr)
+            {
+                MessageBox.Show("ERRORE: per postare la tua storia, inserisci l'autore");
                 return;
             }
             testo = txtTesto.Text;                           //TESTO SCRITTO DALL'UTENTE
@@ -51,9 +66,16 @@ namespace Filtro_Parolacce
 
             percentuale = percentualeParolacce(testo, linguaInglese);       //RESTITUISCE LA PERCENTUALE DELLE PAROLACCE TROVATE IN UN TESTO
 
+            autore = textBox1.Text;
 
+            MessageBox.Show("CONGRATULAZIONI: la tua storia è stata postata con successo");
 
         }
+
+
+
+
+
 
 
 
@@ -75,9 +97,9 @@ namespace Filtro_Parolacce
 
         void ordinaArrayStringhe(string[] array)
         {
-            for(int i=0; i < array.Length - 1; i++)
+            for (int i = 0; i < array.Length - 1; i++)
             {
-                for(int j=0; j< array.Length; j++)
+                for (int j = 0; j < array.Length; j++)
                 {
                     if (string.Compare(array[i], array[j]) < 0)
                     {
@@ -110,7 +132,7 @@ namespace Filtro_Parolacce
 
             int parolacceTrovate = 0;
             int parolacceNonTrovate = 0;
-            for (int i=0; i < paroleTesto.Length; i++)
+            for (int i = 0; i < paroleTesto.Length; i++)
             {
                 bool trovataParola = ricercaParola(paroleTesto[i], parolacce);
                 if (trovataParola)
@@ -120,7 +142,7 @@ namespace Filtro_Parolacce
             }
 
             int paroleTotali = parolacceTrovate + parolacceNonTrovate;
-            double percentuale = (paroleTotali / ((parolacceTrovate==0)?1:parolacceTrovate)) * 100;
+            double percentuale = (paroleTotali / ((parolacceTrovate == 0) ? 1 : parolacceTrovate)) * 100;
 
             return percentuale;
 
@@ -137,6 +159,7 @@ namespace Filtro_Parolacce
         {
             int primo, medio, ultimo;
             primo = 0;
+
             ultimo = testo.Length - 1;
             while (primo <= ultimo)
             {
@@ -169,7 +192,7 @@ namespace Filtro_Parolacce
             string[] parole = testo.Split(' ');         //ARRAY DELLE PAROLE SCRITTE DALL'UTENTE
             for (int i = 0; i < parole.Length; i++)
             {
-                bool controllo = ricercaParola(parole[i],paroleInglesi);
+                bool controllo = ricercaParola(parole[i], paroleInglesi);
                 if (controllo)
                 {
                     paroleTrov++;
@@ -202,13 +225,27 @@ namespace Filtro_Parolacce
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
             paroleInglesi = estrazioneParole("Lista parole Inglese.txt");
 
 
 
         }
 
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("attenzione: srivi nel posto adatto!");
+            txtTesto.Focus();
+        }
 
+        private void txtTesto_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
